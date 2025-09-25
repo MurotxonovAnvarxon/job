@@ -1,30 +1,19 @@
 part of 'job_bloc.dart';
 
-abstract class JobState extends Equatable {
-  const JobState();
+class JobState {
+  final List<Job>? jobs;
+  final String? message;
+  final Status? status;
 
-  @override
-  List<Object> get props => [];
-}
+  JobState({this.jobs, this.message, this.status});
 
-class JobInitial extends JobState {}
-
-class JobLoading extends JobState {}
-
-class JobLoaded extends JobState {
-  final List<Job> jobs;
-
-  const JobLoaded(this.jobs);
-
-  @override
-  List<Object> get props => [jobs];
-}
-
-class JobError extends JobState {
-  final String message;
-
-  const JobError(this.message);
-
-  @override
-  List<Object> get props => [message];
+  JobState copyWith({
+    final List<Job>? jobs,
+    final String? message,
+    final Status? status,
+  }) => JobState(
+    jobs: jobs ?? this.jobs,
+    message: message ?? this.message,
+    status: status ?? this.status,
+  );
 }
