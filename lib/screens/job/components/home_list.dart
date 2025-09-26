@@ -5,6 +5,7 @@ import 'package:job/components/job_card.dart';
 import 'package:job/utils/enums.dart';
 
 import '../../../components/loading_indicator.dart';
+import '../create_job_screen.dart';
 
 class HomeList extends StatefulWidget {
   const HomeList({super.key});
@@ -112,12 +113,12 @@ class _HomeListState extends State<HomeList> {
                     const SizedBox(height: 32),
                     ElevatedButton.icon(
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (_) => const CreateJobScreen(),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const CreateJobScreen(),
+                          ),
+                        );
                       },
                       icon: const Icon(Icons.add),
                       label: const Text('Create Job'),

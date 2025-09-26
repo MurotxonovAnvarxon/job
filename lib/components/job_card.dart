@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:job/models/response/get_all_jobs.dart';
-import '../models/job_model.dart';
 import 'package:intl/intl.dart';
 
 class JobCard extends StatelessWidget {

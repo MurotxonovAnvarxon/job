@@ -17,7 +17,6 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
   final PageController _pageController = PageController();
   int _currentStep = 0;
 
-  // Controllers
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _companyController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
@@ -26,7 +25,6 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
   final TextEditingController _minSalaryController = TextEditingController();
   final TextEditingController _maxSalaryController = TextEditingController();
 
-  // Form fields
   String _workFormat = 'remote';
   String _employmentType = 'full_time';
   String _salaryPeriod = 'per_month';
@@ -85,7 +83,6 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
 
   void _submitJob({bool isDraft = false}) {
     if (_formKey.currentState!.validate()) {
-      // Prepare full description with skills and languages
       String fullDescription = _descriptionController.text;
       if (_selectedSkills.isNotEmpty) {
         fullDescription += '\n\nRequired Skills: ${_selectedSkills.join(', ')}';
@@ -96,10 +93,9 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
             .join(', ')}';
       }
 
-      // Create GetAllJobsResponse object
       final job = GetAllJobsResponse(
         id: null,
-        postedByUser: null, // Will be set in repository
+        postedByUser: null,
         postedByDisplayName: _companyController.text,
         title: _titleController.text,
         description: fullDescription,
@@ -112,10 +108,9 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
         searchTsv: '${_titleController.text} ${_descriptionController.text}',
-        userId: null, // Will be set in repository
+        userId: null,
       );
 
-      // Dispatch create job event
       context.read<JobBloc>().add(CreateJob(job));
 
       Navigator.pop(context);
@@ -286,7 +281,6 @@ class _CreateJobScreenState extends State<CreateJobScreen> {
           SizedBox(height: 24),
           _buildLabel('Employment Type'),
           SizedBox(height: 12),
-          // Employment Type - 2 rows for better layout
           Column(
             children: [
               Row(

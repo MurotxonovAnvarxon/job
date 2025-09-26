@@ -235,7 +235,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       const SizedBox(height: 24),
 
-                      // Sign Up Button
                       CustomButton(
                         text: 'Sign Up',
                         onPressed: _onSignUp,
@@ -246,7 +245,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       const SizedBox(height: 24),
 
-                      // Divider
                       Row(
                         children: [
                           Expanded(
@@ -274,8 +272,6 @@ class _SignupScreenState extends State<SignupScreen> {
                         ],
                       ),
                       const SizedBox(height: 24),
-
-                      // Social Sign Up
                       Row(
                         children: [
                           Expanded(
@@ -330,7 +326,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       const SizedBox(height: 24),
 
-                      // Sign In Link
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../bloc/auth/auth_bloc.dart';
 import '../../bloc/job/job_bloc.dart';
-import '../../components/job_card.dart';
-import '../../components/loading_indicator.dart';
 import 'components/app_bar.dart';
 import 'components/home_list.dart';
-import 'components/log_out_dialog.dart';
 import 'create_job_screen.dart';
 
 class JobsListScreen extends StatefulWidget {
@@ -58,7 +56,6 @@ class _JobsListScreenState extends State<JobsListScreen> {
             leading: SizedBox(),
           ),
 
-          // Jobs List
           SliverPadding(
             padding: const EdgeInsets.only(top: 16),
             sliver: HomeList(),

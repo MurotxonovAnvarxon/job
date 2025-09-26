@@ -25,24 +25,21 @@ class JobRepository {
 
   Future<GetAllJobsResponse> createJob(GetAllJobsResponse job) async {
     try {
-      // Get current user - REQUIRED
       final user = _supabase.auth.currentUser;
 
       if (user == null) {
         throw Exception('User not authenticated. Please login to create a job.');
       }
 
-      // Get user email - REQUIRED
       final userEmail = user.email;
       if (userEmail == null) {
         throw Exception('User email not found. Please login again.');
       }
 
-      // Prepare job data with all required fields
       final jobData = {
         'title': job.title ?? '',
         'posted_by_display_name': job.postedByDisplayName ?? userEmail.split('@')[0],
-        'posted_by_user': userEmail,  // Required - user's email
+        'posted_by_user': userEmail,
         'description': job.description ?? '',
         'location': job.location ?? '',
         'employment_type': job.employmentType ?? 'full_time',
@@ -53,7 +50,7 @@ class JobRepository {
         'created_at': DateTime.now().toIso8601String(),
         'updated_at': DateTime.now().toIso8601String(),
         'search_tsv': job.searchTsv ?? '${job.title} ${job.description}',
-        'user_id': user.id,  // Required - user's ID
+        'user_id': user.id,
       };
 
       print("Creating job with data: $jobData");
@@ -79,14 +76,13 @@ class JobRepository {
         throw Exception('User not authenticated.');
       }
 
-      // Add updated_at timestamp
       updates['updated_at'] = DateTime.now().toIso8601String();
 
       final response = await _supabase
           .from('jobs')
           .update(updates)
           .eq('id', jobId)
-          .eq('user_id', user.id)  // Ensure user can only update their own jobs
+          .eq('user_id', user.id)
           .select()
           .single();
 
@@ -108,7 +104,7 @@ class JobRepository {
           .from('jobs')
           .delete()
           .eq('id', jobId)
-          .eq('user_id', user.id);  // Ensure user can only delete their own jobs
+          .eq('user_id', user.id);
     } catch (e) {
       throw Exception('Failed to delete job: $e');
     }

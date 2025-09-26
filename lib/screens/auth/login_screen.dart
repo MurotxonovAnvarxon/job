@@ -181,7 +181,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 24),
 
-                      // Social Login Buttons (optional)
                       Row(
                         children: [
                           Expanded(
@@ -236,7 +235,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 24),
 
-                      // Sign Up Link
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
