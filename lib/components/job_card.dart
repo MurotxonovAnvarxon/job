@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:job/models/response/get_all_jobs.dart';
 import '../models/job_model.dart';
 import 'package:intl/intl.dart';
 
 class JobCard extends StatelessWidget {
-  final Job job;
+  final GetAllJobsResponse job;
 
   const JobCard({Key? key, required this.job}) : super(key: key);
 
@@ -25,26 +26,44 @@ class JobCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    job.title,
+                    job.title??"",
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                if (job.salary != null)
+                // if (job.salaryMax != null)
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: const Color(0xFF9FC348).withOpacity(0.1),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Text(
-                      job.salary!,
-                      style: const TextStyle(
-                        color: Color(0xFF9FC348),
-                        fontWeight: FontWeight.w600,
-                      ),
+                    child: Row(
+                      children: [
+                        Text(
+                          "${job.salaryMin??0}-",
+                          style: const TextStyle(
+                            color: Color(0xFF9FC348),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          "${job.salaryMax??0}",
+                          style: const TextStyle(
+                            color: Color(0xFF9FC348),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          " ${job.currency}",
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
               ],

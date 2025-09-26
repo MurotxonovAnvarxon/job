@@ -16,6 +16,6 @@ class StreamJobs extends JobEvent {
 }
 
 class CreateJob extends JobEvent {
-  final Job job;
+  final GetAllJobsResponse job;
 
   const CreateJob(this.job);}

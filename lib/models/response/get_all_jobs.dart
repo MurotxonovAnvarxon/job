@@ -1,18 +1,18 @@
 class GetAllJobsResponse {
-  final int id;
-  final String postedByUser;
-  final String postedByDisplayName;
-  final String title;
-  final String description;
-  final String location;
-  final String employmentType;
-  final int salaryMin;
-  final int salaryMax;
-  final String currency;
-  final String status;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final String searchTsv;
+  final int? id;
+  final String? postedByUser;
+  final String? postedByDisplayName;
+  final String? title;
+  final String? description;
+  final String? location;
+  final String? employmentType;
+  final int? salaryMin;
+  final int? salaryMax;
+  final String? currency;
+  final String? status;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final String? searchTsv;
   final String? userId;
 
   GetAllJobsResponse({
@@ -66,8 +66,8 @@ class GetAllJobsResponse {
       'salary_max': salaryMax,
       'currency': currency,
       'status': status,
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
+      'created_at': createdAt?.toIso8601String(),
+      'updated_at': updatedAt?.toIso8601String(),
       'search_tsv': searchTsv,
       'user_id': userId,
     };

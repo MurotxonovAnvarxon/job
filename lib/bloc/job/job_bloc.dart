@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:job/models/response/get_all_jobs.dart';
 import 'package:job/utils/enums.dart';
 import '../../repositories/job_repository.dart';
-import '../../models/job_model.dart';
 
 part 'job_event.dart';
 part 'job_state.dart';
@@ -24,12 +24,30 @@ class JobBloc extends Bloc<JobEvent, JobState> {
     on<CreateJob>((event, emit) async {
       emit(state.copyWith(status: Status.loading));
       try {
-        await _jobRepository.createJob(event.job);
+        final createdJob = await _jobRepository.createJob(event.job);
+
+        // Show success and reload jobs
+        emit(state.copyWith(
+            status: Status.success,
+            message: 'Job created successfully!'
+        ));
+
         // Reload jobs after creating
         final jobs = await _jobRepository.getJobs();
         emit(state.copyWith(jobs: jobs, status: Status.success));
       } catch (e) {
-        emit(state.copyWith(status: Status.error, message: e.toString()));
+        // Parse error message for better user feedback
+        String errorMessage = e.toString();
+        if (errorMessage.contains('User not authenticated')) {
+          errorMessage = 'Please login to create a job post';
+        } else if (errorMessage.contains('posted_by_user')) {
+          errorMessage = 'Unable to identify user. Please logout and login again.';
+        }
+
+        emit(state.copyWith(
+            status: Status.error,
+            message: errorMessage
+        ));
       }
     });
 
@@ -38,7 +56,7 @@ class JobBloc extends Bloc<JobEvent, JobState> {
       try {
         await emit.forEach(
           _jobRepository.getJobsStream(),
-          onData: (List<Job> jobs) => state.copyWith(
+          onData: (List<GetAllJobsResponse> jobs) => state.copyWith(
             jobs: jobs,
             status: Status.success,
           ),
@@ -53,4 +71,3 @@ class JobBloc extends Bloc<JobEvent, JobState> {
     });
   }
 }
-

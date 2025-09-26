@@ -7,6 +7,7 @@ import '../../components/loading_indicator.dart';
 import 'components/app_bar.dart';
 import 'components/home_list.dart';
 import 'components/log_out_dialog.dart';
+import 'create_job_screen.dart';
 
 class JobsListScreen extends StatefulWidget {
   const JobsListScreen({super.key});
@@ -66,10 +67,10 @@ class _JobsListScreenState extends State<JobsListScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (_) => const CreateJobScreen()),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const CreateJobScreen()),
+          );
         },
         backgroundColor: const Color(0xFF9FC348),
         icon: const Icon(Icons.add, color: Colors.white),
