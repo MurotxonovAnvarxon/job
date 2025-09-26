@@ -7,7 +7,7 @@ import 'repositories/job_repository.dart';
 import 'bloc/auth/auth_bloc.dart';
 import 'bloc/job/job_bloc.dart';
 import 'screens/splash_screen.dart';
-
+//.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
